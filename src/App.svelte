@@ -1,14 +1,9 @@
 <script>
 	import Emojis from './Emojis.svelte';
+	import Search from './Search.svelte';
+	import {fetchAllEmojis} from './API'
 
-	async function getData() {
-		const resp = await fetch('https://emoji-api.com/emojis?access_key=db84f07a2ee1d3865941220a913cba2510f79b33');
-		const data = await resp.json();
-
-		return data;
-	}
-
-	let promis = getData();
+	let promis = fetchAllEmojis();
 
 </script>
 
@@ -22,7 +17,11 @@
 		{/await}
 	</div>
 
-	<button class="btn" on:click={() => promis = getData()}>Get Random Emojis</button>
+	<button class="btn" on:click={() => promis = fetchAllEmojis()}>Get Random Emojis</button>
+
+	<br>
+
+	<Search/>
 
 </main>
 
